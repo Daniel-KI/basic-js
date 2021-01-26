@@ -1,25 +1,17 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function repeater(str, options) {
-  let resultStr = '';
   let onePartOfStr = '';
   let currentOptions = {
     repeatTimes: typeof (options.repeatTimes) !== 'undefined' ? options.repeatTimes : 1,
     separator: typeof (options.separator) !== 'undefined' ? options.separator : '+',
     addition: typeof (options.addition) !== 'undefined' ? options.addition : '',
-    additionRepeatTimes: typeof (options.additionRepeatTimes) !== 'undefined' ? options.additionRepeatTimes : 0,
+    additionRepeatTimes: typeof (options.additionRepeatTimes) !== 'undefined' ? options.additionRepeatTimes : 1,
     additionSeparator: typeof (options.additionSeparator) !== 'undefined' ? options.additionSeparator : '|'
   };
 
-  onePartOfStr = String(str) + currentOptions.addition;
-  for (let i = 0; i < currentOptions.additionRepeatTimes - 1; i++) {
-    onePartOfStr += currentOptions.additionSeparator + currentOptions.addition;
-  }
-
-  resultStr = onePartOfStr;
-  for (let i = 0; i < currentOptions.repeatTimes - 1; i++) {
-    resultStr += currentOptions.separator + onePartOfStr;
-  }
+  let additionString = Array(currentOptions.additionRepeatTimes).fill(`${currentOptions.addition}${currentOptions.additionSeparator}`).join('').slice(0, -currentOptions.additionSeparator.length);
+  let resultStr = Array(currentOptions.repeatTimes).fill(`${str}${additionString}${currentOptions.separator}`).join('').slice(0, -currentOptions.separator.length);
 
   return resultStr;
 };
