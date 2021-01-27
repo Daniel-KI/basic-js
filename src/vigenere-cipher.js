@@ -7,7 +7,7 @@ class VigenereCipheringMachine {
 
   encrypt(message, key) {
     if (message == null || key == null) throw Error();
-    const latinLetters = /[A-Za-z]/;
+    const LATIN_LETTERS = /[A-Za-z]/;
     const ALPHABET_LENGTH = 26;
     const FIRST_LETTER_CODE = 'A'.charCodeAt();
     let codingLetterCounter = 0;
@@ -16,7 +16,7 @@ class VigenereCipheringMachine {
     key = key.toUpperCase();
 
     message.forEach((element, index) => {
-      if (latinLetters.test(element)) {
+      if (LATIN_LETTERS.test(element)) {
         message[index] = String.fromCharCode(
           ((element.charCodeAt() - FIRST_LETTER_CODE
             + (key[codingLetterCounter % key.length].charCodeAt() - FIRST_LETTER_CODE))
@@ -29,21 +29,21 @@ class VigenereCipheringMachine {
   }
   decrypt(message, key) {
     if (message == null || key == null) throw Error();
-    const latinLetters = /[A-Za-z]/;
-    const alphabetLength = 26;
-    const firstLetterCharCode = 'A'.charCodeAt();
+    const LATIN_LETTERS = /[A-Za-z]/;
+    const ALPHABET_LENGTH = 26;
+    const FIRST_LETTER_CODE = 'A'.charCodeAt();
     let codingLetterCounter = 0;
 
     message = message.toUpperCase().split('');
     key = key.toUpperCase();
 
     message.forEach((element, index) => {
-      if (latinLetters.test(element)) {
+      if (LATIN_LETTERS.test(element)) {
         message[index] = String.fromCharCode(
-          ((element.charCodeAt() - firstLetterCharCode
-            + (alphabetLength - (key[codingLetterCounter % key.length].charCodeAt() - firstLetterCharCode)))
-            % alphabetLength)
-          + firstLetterCharCode);
+          ((element.charCodeAt() - FIRST_LETTER_CODE
+            + (ALPHABET_LENGTH - (key[codingLetterCounter % key.length].charCodeAt() - FIRST_LETTER_CODE)))
+            % ALPHABET_LENGTH)
+          + FIRST_LETTER_CODE);
         codingLetterCounter++;
       }
     });

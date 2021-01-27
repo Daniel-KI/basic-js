@@ -8,8 +8,8 @@ module.exports = function dateSample(sampleActivity) {
     || isNaN(sampleActivity)
     || Number(sampleActivity) <= 0
     || Number(sampleActivity) >= MODERN_ACTIVITY) return false;
-  var fossilАge;
-  var decayConstant = Math.log(2) / HALF_LIFE_PERIOD;
+  let fossilАge;
+  let decayConstant = Math.log(2) / HALF_LIFE_PERIOD;
   fossilАge = Math.round(Math.log(MODERN_ACTIVITY / Number(sampleActivity) / decayConstant));
   return fossilАge;
 };

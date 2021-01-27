@@ -1,7 +1,6 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function repeater(str, options) {
-  let onePartOfStr = '';
   let currentOptions = {
     repeatTimes: typeof (options.repeatTimes) !== 'undefined' ? options.repeatTimes : 1,
     separator: typeof (options.separator) !== 'undefined' ? options.separator : '+',
